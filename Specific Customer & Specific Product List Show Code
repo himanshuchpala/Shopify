@@ -1,0 +1,44 @@
+
+{% if customer %}
+ 
+    {%- for product in collection.products limit: product_limit-%} 
+       {% if product.tags contains 'PROD-R1' or product.tags contains 'PROD-FILMTEC' or product.tags contains 'PROD-HYDRO' or product.tags contains 'PROD-TF' or product.tags contains 'PROD-NL' or product.tags contains 'PROD-JT' or product.tags contains 'PROD-HT' or product.tags contains 'PROD-HF' or product.tags contains 'PROD-L1' or product.tags contains 'PROD-PAVEL' or product.tags contains 'PROD-PRO' or product.tags contains 'HAWTHORNE' %}
+           
+           
+           {% for tag in product.tags %} 
+              {% if customer.tags contains tag %}
+                {%- include 'product-item', list: show_as_list, grid_classes: grid_classes -%}
+              {% endif %} 
+            {% endfor %} 
+
+                      
+      {% else %} 
+
+         {% if customer.tags contains "HAWTHORNE-NO" and product.tags contains "HAWTHORNE-NO" %}
+            
+                      
+                      {{ '' }}
+           
+          {% else %} 
+                      
+            {%- include 'product-item', list: show_as_list, grid_classes: grid_classes -%}
+                      
+		{% endif %}
+
+		{% endif %}
+    {%- endfor -%} 
+
+{% else %}
+  {%- for product in collection.products limit: product_limit-%} 
+          {% if product.tags contains 'PROD-R1' or product.tags contains 'PROD-FILMTEC' or product.tags contains 'PROD-HYDRO' or product.tags contains 'PROD-TF' or product.tags contains 'PROD-NL' or product.tags contains 'PROD-JT' or product.tags contains 'PROD-HT' or product.tags contains 'PROD-HF' or product.tags contains 'PROD-L1' or product.tags contains 'PROD-PAVEL' or product.tags contains 'PROD-PRO' or product.tags contains 'HAWTHORNE' %}
+                      {{ '' }}
+          {% else %} 
+
+            
+           	{%- include 'product-item', list: show_as_list, grid_classes: grid_classes -%}
+		{% endif %}
+    {%- endfor -%} 
+{% endif %}
+   
+
+
