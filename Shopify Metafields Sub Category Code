@@ -1,0 +1,26 @@
+<section class="p-0">
+  <div class="container-xl">
+    <div class="row">
+      {% assign recommended_products =  collection.metafields.custom.sub_collections.value %}
+      {%- for collection in recommended_products -%}
+      <div class="col-sm-3">
+        <a href="{{ collection.url }}">
+          <div class="setbg r109 product_bg_n">
+            {%- if collection.image -%}
+            {%- assign collection_image = collection.image -%}
+            {%- elsif collection.products.first and collection.products.first.images != empty -%}
+            {%- assign collection_image = collection.products.first.featured_image -%}
+            {%- else -%}
+            {%- assign collection_image = blank -%}
+            {%- endif -%}
+            <img src="{{ collection_image | img_url: '480x' }}" alt="" class="bg-img">
+          </div>
+          <div class="product_list_title_n">
+            {{ collection.title }}
+          </div>
+        </a>
+      </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
