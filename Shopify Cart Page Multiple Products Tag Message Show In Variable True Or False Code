@@ -1,0 +1,19 @@
+
+{% assign cakes_exist = false %} 
+{% assign national_shipping_exist = false %}
+
+  {% for item in cart.items %}
+    {% if item.product.tags contains 'cakes' %}
+      {% assign cakes_exist = true %} 
+    {% elsif item.product.tags contains 'national_shipping' %}
+       {% assign national_shipping_exist = true %}
+    {% endif %}
+  {% endfor %}
+
+  {% if national_shipping_exist and cakes_exist %}
+      <p style="color:red;text-align:center;"><strong> Sorry You Cant checkout with selected option pick up and national shipping.</strong></p>
+  {% elsif cakes_exist %}
+      <p style="color:red;text-align:center;"><strong>Please Select Bottom Store Pickup or Local Delivery</strong></p>
+  {% elsif national_shipping_exist %}
+      <p style="color:red;text-align:center;"><strong>Please Select Bottom Shipping</strong></p>
+  {% endif %}
