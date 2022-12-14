@@ -1,1 +1,33 @@
 
+//////////////////////////////////////////////  Product Details File Code //////////////////////////////////////////////
+
+ {% form 'product', product, class:form_class, id:form_id, data-product-form: '' %}
+<p>
+    <label for="date">Pick a delivery date:</label>
+    <input id="date" type="dete" name="properties[Date]" value="" />
+    <span>We do not deliver during the week-end.</span>
+  </p>
+
+ {% endform %}
+
+
+
+
+//////////////////////////////////////////////  Cart Page File Code //////////////////////////////////////////////
+
+              {% assign property_size = item.properties | size %}
+                        {% if property_size > 0 %}
+                          {% for p in item.properties %}
+                            {% if forloop.first %}<br>{% endif %}
+                            {% assign first_character_in_key = p.first | truncate: 1, '' %}
+                            {% unless p.last == blank or first_character_in_key == '_' %}
+                            <small>{{ p.first }}: </small>
+                            {% if p.last contains '/uploads/' %}
+                              <a href="{{ p.last }}"><small>{{ p.last | split: '/' | last }}</small></a>
+                            {% else %}
+                              <small>{{ p.last }}</small>
+                            {% endif %}
+                            <br>
+                          {% endunless %}
+                        {% endfor %}
+                      {% endif %}
