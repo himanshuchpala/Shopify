@@ -1,0 +1,43 @@
+ //////////////////////////////////////////////  Cart File Code //////////////////////////////////////////////
+
+
+<div class="count">
+   <h6>CART WILL BE EMPTY IN </h6>
+    <div id="timer"><h2 style="margin:0px;color:red;font-family:sans-serif;">44:02</h2></div>
+</div>
+
+
+//////////////////////////////////////////////  Script File Code //////////////////////////////////////////////
+
+<script type="text/javascript">  
+  var h6 = document.getElementsByTagName("h6");
+  h6[0].innerHTML = "CART WILL BE EMPTY IN ";
+  var sec         = 2699,
+      countDiv    = document.getElementById("timer"),
+      secpass,
+      countDown   = setInterval(function () {
+          'use strict';
+          
+          secpass();
+      }, 1000);
+  function secpass() {
+      'use strict';    
+      var min     = Math.floor(sec / 60),
+          remSec  = sec % 60;    
+      if (remSec < 10) {        
+          remSec = '0' + remSec;    
+      }
+      if (min < 10) {        
+          min = '0' + min;    
+      }
+      countDiv.innerHTML = '<h2 style="margin:0px;color:red;font-family:sans-serif;">'+min + ":" + remSec+'</h2>';    
+      if (sec > 0) {        
+          sec = sec - 1;        
+      } else {        
+          clearInterval(countDown);        
+          //countDiv.innerHTML = 'countdown done';  
+          // location.reload();
+        window.location = "/cart/clear"; 
+      }
+  }
+</script>
